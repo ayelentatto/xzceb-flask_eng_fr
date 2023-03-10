@@ -1,7 +1,7 @@
 import json
+import os
 from ibm_watson import LanguageTranslatorV3
 from ibm_cloud_sdk_core.authenticators import IAMAuthenticator
-import os
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -15,33 +15,34 @@ authenticator = IAMAuthenticator(apikey)
 # Crea una instancia de LanguageTranslatorV3
 language_translator = LanguageTranslatorV3(
     version='2021-09-01',
-    authenticator=authenticator
+    authenticator = authenticator
 )
 
 # Establece la URL del servicio
 language_translator.set_service_url(url)
 
-def englishToFrench(englishText):
+def english_to_french(english_text):
     # Traduce el texto de entrada en inglés a francés
     translation = language_translator.translate(
-        text=englishText,
+        text= english_text ,
         source='en',
         target='fr'
     ).get_result()
 
     # Extrae el texto francés de la respuesta de traducción
-    frenchText = translation['translations'][0]['translation']
+    french_text = translation['translations'] [0] ['translation']
 
-    return frenchText
+    return french_text
 
-print(englishToFrench("¡Hola, cómo estás?"))
+print(english_to_french("¡Hola, cómo estás?"))
 
-def  frenchToEnglish(frenchText):
+def  french_to_english(french_text):
     translation = language_translator.translate(
-        text=englishText,
+        text= french_text ,
         source='en',
         target='fr'
     ).get_result()
 
-    frenchText = translation['translations'][0]['translation']
-    return frenchText
+    english_text = translation['translations'] [0] ['translation']
+
+    return english_text
